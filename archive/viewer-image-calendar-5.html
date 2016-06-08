@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="./css/site.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -19,24 +20,53 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container">
-      <h1>IIIF Newspaper Viewer Mock-ups</h1>
+    <div class="container-fluid">
+      <h1>IIIF Newspaper Viewer Mock-ups (Design #1-2)</h1>
       <p><a href="./">< back to mock-up index</a></p>
       <hr>
       <div class="row">
         <div class="col-md-12">
           <h2>Der Deutsche correspondent., July 01, 1904, Image 1</h2>
-          <p>About <a href="./about.html">Der Deutsche correspondent. (Baltimore, Md.) 1841-1918</a></p>
+          <div class="row collapse" id="collapseMoreInfo">
+            <div class="col-md-6">
+              <p>About <a href="./about.html">Der Deutsche correspondent. (Baltimore, Md.) 1841-1918</a></p>
+              <p><strong>Alternative Titles:</strong></p>
+              <ul>
+                <li>Sonntags-Correspondent</li>
+              </ul>
+              <p><strong>Place of publication:</strong></p>
+              <p>Baltimore, Md.</p>
+              <p><strong>Geographic coverage:</strong></p>
+              <ul>
+                <li>Baltimore, Maryland  |  View more titles from this: <a>City</a> <a>State</a></li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Publisher:</strong></p>
+              <p>F. Raine</p>
+              <p><strong>Dates of publication:</strong></p>
+              <p>1841-1918</p>
+              <p><strong>Description:</strong></p>
+              <ul>
+                <li>Jahrg. 78, Nr. 119 (28. Apr. 1918).</li>
+                <li>Began in 1841?</li>
+              </ul>
+              <p><strong>Frequency:</strong></p>
+              <p>Daily 1847-1918</p>
+            </div>
+          </div>
+          <button class="btn btn-default pull-right" type="button" data-toggle="collapse" data-target="#collapseMoreInfo" aria-expanded="false" aria-controls="collapseMoreInfo">More info about this newspaper</button>
         </div>
       </div>
+      <hr>
       <div class="row">
         <div class="col-md-3">
           <div class="btn-toolbar" role="toolbar" aria-label="news paper nav">
             <div class="btn-group" role="group" aria-label="...">
-              <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" data-container="body" title="View Image Only" href="./viewer-image.html">
+              <a class="btn btn-default btn-sm active" data-toggle="tooltip" data-placement="bottom" data-container="body" title="View Image Only">
                 <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
               </a>
-              <a class="btn btn-default btn-sm active" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Image + Text">
+              <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Image + Text" href="./viewer-imagetext.html">
                 <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> |
                 <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
               </a>
@@ -70,32 +100,22 @@
             </button>
           </div>
           <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-sm btn-default disabled" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Pervious Page">
-              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            </button>
             <a class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Pages" href="./viewer-all-pages.html">
-              <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Page 1 / 4
+              <span class="glyphicon glyphicon-th" aria-hidden="true"></span> All Pages
             </a>
-            <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Next Page">
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Issues">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> All Issues
             </button>
-            <!-- <button type="button" class="btn btn-sm btn-default">
-              <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-            </button> -->
           </div>
           <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Pervious Issue">
-              <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-            </button>
-            <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Issues">
-              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Issues
-            </button>
-            <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Next Issue">
-              <span class="glyphicon glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-            </button>
-            <!-- <button type="button" class="btn btn-sm btn-default">
-              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-            </button> -->
+            <div class="form-inline">
+              <div class='input-group date' id='datetimepicker10'>
+                <input type='text' class="form-control input-sm" />
+                <span class="input-group-addon input-sm">
+                  Issue <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -118,15 +138,59 @@
       </div>
       <hr>
       <div class="row">
-        <div class="col-md-8">
-          <div class="background-grey outline">
-            <img src="img/seq-1.jpg" alt="placeholder" class="img-responsive center-block" style="max-height: 1000px;">
+        <div class="col-md-12">
+          <div class="text-center" style="overflow: auto; overflow-y: scroll; max-width: 100%">
+            <div style="width: 4828px;">
+              <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                <img src="./img/seq-1.jpg">
+                <div class="caption">
+                  <span>Page 1</span>
+                </div>
+              </div>
+              <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                <img src="./img/seq-2.jpg">
+                <div class="caption">
+                  <span>Page 2</span>
+                </div>
+              </div>
+              <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                <img src="./img/seq-3.jpg">
+                <div class="caption">
+                  <span>Page 3</span>
+                </div>
+              </div>
+              <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                <img src="./img/seq-4.jpg">
+                <div class="caption">
+                  <span>Page 4</span>
+                </div>
+              </div>
+              <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                <img src="./img/seq-5.jpg">
+                <div class="caption">
+                  <span>Page 5</span>
+                </div>
+              </div>
+              <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                <img src="./img/seq-6.jpg">
+                <div class="caption">
+                  <span>Page 6</span>
+                </div>
+              </div>
+              <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                <img src="./img/seq-7.jpg">
+                <div class="caption">
+                  <span>Page 7</span>
+                </div>
+              </div>
+              <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                <img src="./img/seq-8.jpg">
+                <div class="caption">
+                  <span>Page 8</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <pre>
-<embed src="text.txt" style="width: 100%; height: 918px;">
-          </pre>
         </div>
       </div>
       <hr>
@@ -142,12 +206,26 @@
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="./js/moment.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
       })
+    </script>
+    <script type="text/javascript">
+      $(function () {
+        $('#datetimepicker10').datetimepicker({
+          minDate : "1/1/1858",
+          maxDate : "9/30/1917",
+          viewMode: 'days',
+          format: 'MM/DD/YYYY',
+          allowInputToggle: true
+        });
+        $('#datetimepicker10').data("DateTimePicker").date('7/1/1907');
+      });
     </script>
   </body>
 </html>

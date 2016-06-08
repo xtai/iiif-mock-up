@@ -22,3 +22,43 @@ pre.text {
     word-wrap: normal;
     white-space: pre;
 }
+
+.pagination {
+    margin: 10px 0;
+}
+
+.thumbnail.active {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+a:hover > .thumbnail {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+a .thumbnail * {
+    text-decoration: none!important;
+}
+
+.form-control:focus,
+.form-control:active {
+    border-color:#ccc;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.btn:focus,
+.btn:active {
+    outline: none!important;
+}
+.btn-warning.btn:focus,
+.btn-warning.btn:active {
+    border-color: #d58512;
+}
+
+.calendar td {
+    text-align: center;
+}

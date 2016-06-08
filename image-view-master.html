@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>IIIF Mockup</title>
+
+    <!-- Bootstrap -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="./css/site.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <!-- Design Decisions -->
+    <div style="position:fixed; z-index: 10; bottom: 0;">
+      <button class="btn btn-warning btn-block" type="button" data-toggle="collapse" data-target="#designCollapse" aria-expanded="false" aria-controls="designCollapse" style="z-index: 120; position: relative; border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: -1px;">
+        Design Decisions
+      </button>
+      <div class="collapse" id="designCollapse">
+        <div class="well" style="background-color: rgba(240, 240, 240, 0.9); margin-bottom: 0px; border-radius: 0;">
+          <!-- 0 Container Width tabs -->
+          <div>
+            0. Container Width: 
+            <div class="btn-group" role="group" aria-label="...">
+              <button class="btn btn-default btn-part0 active" onclick="set_active(0, 1); set_container_wide(false);" id="btn-part0-design1">Responsive Fixed Width Container</button>
+              <button class="btn btn-default btn-part0" onclick="set_active(0, 2); set_container_wide(true);" id="btn-part0-design2">Full Width Container</button>
+            </div>
+          </div>
+          <br>  
+          <!-- 1 Heading tabs -->
+          <div>
+            1. Heading Designs: 
+            <div class="btn-group" role="group" aria-label="...">
+              <a type="button" class="btn btn-default btn-part1 active" href="#part1-design1" aria-controls="part1-design1" data-toggle="tab" role="tab" onclick="set_active(1, 1);" id="btn-part1-design1">1: Collapsible Info</a>
+              <a type="button" class="btn btn-default btn-part1" href="#part1-design2" aria-controls="part1-design2" data-toggle="tab" role="tab" onclick="set_active(1, 2);" id="btn-part1-design2">2: Expanded Info</a>
+              <a type="button" class="btn btn-default btn-part1" href="#part1-design3" aria-controls="part1-design3" data-toggle="tab" role="tab" onclick="set_active(1, 3);" id="btn-part1-design3">3: Only About Link</a>
+            </div>
+          </div>
+          <br>
+          <!-- 2 Toolbar tabs -->
+          <div>
+            2. Toolbar Designs: 
+            <div class="btn-group" role="group" aria-label="...">
+              <a type="button" class="btn btn-default btn-part2 active" href="#part2-design1" aria-controls="part2-design1" data-toggle="tab" role="tab" onclick="set_active(2, 1);" id="btn-part2-design1">1: with Date Picker</a>
+              <a type="button" class="btn btn-default btn-part2" href="#part2-design2" aria-controls="part2-design2" data-toggle="tab" role="tab" onclick="set_active(2, 2);" id="btn-part2-design2">2: Arrow Nav</a>
+              <a type="button" class="btn btn-default btn-part2" href="#part2-design3" aria-controls="part2-design3" data-toggle="tab" role="tab" onclick="set_active(2, 3);" id="btn-part2-design3">3: Calendar Pagination</a>
+            </div>
+          </div>
+          <br>
+          <!-- 3 Image Area tabs -->
+          <div>
+            3. Image Viewer Layout: 
+            <div class="btn-group" role="group" aria-label="...">
+              <a type="button" class="btn btn-default btn-part3 active" href="#part3-design1" aria-controls="part3-design1" data-toggle="tab" role="tab" onclick="set_active(3, 1);" id="btn-part3-design1">1: Thumbnail top</a>
+              <a type="button" class="btn btn-default btn-part3" href="#part3-design2" aria-controls="part3-design2" data-toggle="tab" role="tab" onclick="set_active(3, 2);" id="btn-part3-design2">2: Thumbnail bottom</a>
+              <a type="button" class="btn btn-default btn-part3" href="#part3-design3" aria-controls="part3-design3" data-toggle="tab" role="tab" onclick="set_active(3, 3);" id="btn-part3-design3">3: Signle Image</a>
+              <a type="button" class="btn btn-default btn-part3" href="#part3-design4" aria-controls="part3-design4" data-toggle="tab" role="tab" onclick="set_active(3, 4);" id="btn-part3-design4">4: Pagination bottom</a>
+              <a type="button" class="btn btn-default btn-part3" href="#part3-design5" aria-controls="part3-design5" data-toggle="tab" role="tab" onclick="set_active(3, 5);" id="btn-part3-design5">5: Thumbnail Left</a>
+              <a type="button" class="btn btn-default btn-part3" href="#part3-design6" aria-controls="part3-design6" data-toggle="tab" role="tab" onclick="set_active(3, 6);" id="btn-part3-design6">6: Horizontal</a>
+              <a type="button" class="btn btn-default btn-part3" href="#part3-design7" aria-controls="part3-design7" data-toggle="tab" role="tab" onclick="set_active(3, 7);" id="btn-part3-design7">7: Two Pages</a>
+            </div>
+          </div>
+          <br>
+          <!-- 4 Text Area tabs -->
+          <div>
+            3. Text Layout: 
+            <div class="btn-group" role="group" aria-label="...">
+              <a type="button" class="btn btn-default btn-part4 active" href="#part4-design1" onclick="set_active(4, 1); set_text(1);" id="btn-part4-design1">Off</a>
+              <a type="button" class="btn btn-default btn-part4" href="#part4-design2" onclick="set_active(4, 2); set_text(2);" id="btn-part4-design2">Left</a>
+              <a type="button" class="btn btn-default btn-part4" href="#part4-design3" onclick="set_active(4, 3); set_text(3);" id="btn-part4-design3">Right</a>
+              <a type="button" class="btn btn-default btn-part4" href="#part4-design4" onclick="set_active(4, 4); set_text(4);" id="btn-part4-design4">Full</a>
+              <a type="button" class="btn btn-default btn-part4" href="#part4-design5" onclick="set_active(4, 5); set_text(5);" id="btn-part4-design5">Bottom</a>
+            </div>
+
+            <!-- Close Button -->
+            <button class="btn btn-danger pull-right" type="button" data-toggle="collapse" data-target="#designCollapse" aria-expanded="false" aria-controls="designCollapse" style="margin-left: 10px; z-index: 120; position: relative;">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Start of Real Content -->
+    <div class="container" id="container-width">
+      <h1>IIIF Newspaper Viewer Mock-ups (Master)</h1>
+      <h2>Design Combination: Image View</h2>
+      <p><a href="./">< back to mock-up index</a></p>
+      <hr>
+      <!-- 1 Heading -->
+      <div id="part1">
+        <!-- 1 Heading Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="part1-design1">
+            <div class="row">
+              <div class="col-md-12">
+                <h2>Der Deutsche correspondent., July 01, 1904, Image 1</h2>
+                <div class="row collapse" id="collapseMoreInfo">
+                  <div class="col-md-6">
+                    <p>About <a href="./about.html">Der Deutsche correspondent. (Baltimore, Md.) 1841-1918</a></p>
+                    <p><strong>Alternative Titles:</strong></p>
+                    <ul>
+                      <li>Sonntags-Correspondent</li>
+                    </ul>
+                    <p><strong>Place of publication:</strong></p>
+                    <p>Baltimore, Md.</p>
+                    <p><strong>Geographic coverage:</strong></p>
+                    <ul>
+                      <li>Baltimore, Maryland  |  View more titles from this: <a>City</a> <a>State</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <p><strong>Publisher:</strong></p>
+                    <p>F. Raine</p>
+                    <p><strong>Dates of publication:</strong></p>
+                    <p>1841-1918</p>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                      <li>Jahrg. 78, Nr. 119 (28. Apr. 1918).</li>
+                      <li>Began in 1841?</li>
+                    </ul>
+                    <p><strong>Frequency:</strong></p>
+                    <p>Daily 1847-1918</p>
+                  </div>
+                </div>
+                <button class="btn btn-default pull-right" type="button" data-toggle="collapse" data-target="#collapseMoreInfo" aria-expanded="false" aria-controls="collapseMoreInfo">More info about this newspaper</button>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="part1-design2">
+            <div class="row">
+              <div class="col-md-12">
+                <h2>Der Deutsche correspondent., July 01, 1904, Image 1</h2>
+                <div class="row">
+                  <div class="col-md-6">
+                    <p>About <a href="./about.html">Der Deutsche correspondent. (Baltimore, Md.) 1841-1918</a></p>
+                    <p><strong>Alternative Titles:</strong></p>
+                    <ul>
+                      <li>Sonntags-Correspondent</li>
+                    </ul>
+                    <p><strong>Place of publication:</strong></p>
+                    <p>Baltimore, Md.</p>
+                    <p><strong>Geographic coverage:</strong></p>
+                    <ul>
+                      <li>Baltimore, Maryland  |  View more titles from this: <a>City</a> <a>State</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <p><strong>Publisher:</strong></p>
+                    <p>F. Raine</p>
+                    <p><strong>Dates of publication:</strong></p>
+                    <p>1841-1918</p>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                      <li>Jahrg. 78, Nr. 119 (28. Apr. 1918).</li>
+                      <li>Began in 1841?</li>
+                    </ul>
+                    <p><strong>Frequency:</strong></p>
+                    <p>Daily 1847-1918</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="part1-design3">
+            <div class="row">
+              <div class="col-md-12">
+                <h2>Der Deutsche correspondent., July 01, 1904, Image 1</h2>
+                <p>About <a href="./about.html">Der Deutsche correspondent. (Baltimore, Md.) 1841-1918</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Heading -->
+      <hr>
+      <!-- 2 Toolbar -->
+      <div id="part2">
+        <!-- 2 Toolbar panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="part2-design1">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="btn-toolbar" role="toolbar" aria-label="news paper nav">
+                  <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-default btn-sm active" data-toggle="tooltip" data-placement="bottom" data-container="body" title="View Image Only" href="#">
+                      <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Image + Text" href="#">
+                      <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> |
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Text Only" href="#">
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </a>
+                  </div>
+                  <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Download">
+                      <span class="glyphicon glyphicon-download-alt"></span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Clipping Image">
+                      <span class="glyphicon glyphicon-scissors" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Share Image">
+                      <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 text-center">
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Reset Zoom">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Zoom In">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Zoom Out">
+                    <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Full Screen">
+                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="btn-group" role="group" aria-label="...">
+                  <a class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Pages" href="#">
+                    <span class="glyphicon glyphicon-th" aria-hidden="true"></span> All Pages
+                  </a>
+                  <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Issues">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> All Issues
+                  </button>
+                </div>
+                <div class="btn-group" role="group" aria-label="...">
+                  <div class="form-inline">
+                    <div class='input-group date' id='datetimepicker0' style="max-width: 150px;">
+                      <input type='text' class="form-control input-sm" />
+                      <span class="input-group-addon input-sm">
+                        Issue <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" class="form-control input-sm" aria-label="search" placeholder="Search">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="collapse" data-target="#advancedSearch1" aria-expanded="false" aria-controls="advancedSearch1"><span class="caret"></span></button>
+                    <button type="button" class="btn btn-sm btn-default" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="collapse" id="advancedSearch1">
+                  <br>
+                  <div class="well">
+                    Advanced Search
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="part2-design2">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="btn-toolbar" role="toolbar" aria-label="news paper nav">
+                  <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-default btn-sm active" data-toggle="tooltip" data-placement="bottom" data-container="body" title="View Image Only" href="#">
+                      <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Image + Text" href="#">
+                      <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> |
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Text Only" href="#">
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </a>
+                  </div>
+                  <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Download">
+                      <span class="glyphicon glyphicon-download-alt"></span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Share Image">
+                      <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 text-center">
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Reset Zoom">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Zoom In">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Zoom Out">
+                    <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Full Screen">
+                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn btn-sm btn-default disabled" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Pervious Page">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  </button>
+                  <a class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Pages" href="#">
+                    <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Page 1 / 4
+                  </a>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Next Page">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  </button>
+                  <!-- <button type="button" class="btn btn-sm btn-default">
+                    <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                  </button> -->
+                </div>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Pervious Issue">
+                    <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                  </button>
+                  <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Issues">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Issues
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Next Issue">
+                    <span class="glyphicon glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                  </button>
+                  <!-- <button type="button" class="btn btn-sm btn-default">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                  </button> -->
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" class="form-control input-sm" aria-label="search" placeholder="Search">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="collapse" data-target="#advancedSearch2" aria-expanded="false" aria-controls="advancedSearch2"><span class="caret"></span></button>
+                    <button type="button" class="btn btn-sm btn-default" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="collapse" id="advancedSearch2">
+                  <br>
+                  <div class="well">
+                    Advanced Search
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="part2-design3">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <ul class="pagination">
+                    <li>
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true"><br>&laquo;</span>
+                      </a>
+                    </li>
+                    <li><a href="#">June 25<br>1984</a></li>
+                    <li><a href="#">June 26<br>1984</a></li>
+                    <li><a href="#">June 27<br>1984</a></li>
+                    <li><a href="#">June 28<br>1984</a></li>
+                    <li><a href="#">June 29<br>1984</a></li>
+                    <li><a href="#">June 30<br>1984</a></li>
+                    <li class="active"><a href="#">July 1<br>1984</a></li>
+                    <li><a href="#">July 2<br>1984</a></li>
+                    <li><a href="#">July 3<br>1984</a></li>
+                    <li><a href="#">July 4<br>1984</a></li>
+                    <li><a href="#">July 5<br>1984</a></li>
+                    <li><a href="#">July 6<br>1984</a></li>
+                    <li><a href="#">July 7<br>1984</a></li>
+                    <li>
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true"><br>&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="btn-toolbar" role="toolbar" aria-label="news paper nav">
+                  <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-default btn-sm active" data-toggle="tooltip" data-placement="bottom" data-container="body" title="View Image Only" href="#">
+                      <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Image + Text" href="#">
+                      <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> |
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Text Only" href="#">
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </a>
+                  </div>
+                  <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Download">
+                      <span class="glyphicon glyphicon-download-alt"></span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Share Image">
+                      <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 text-center">
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Reset Zoom">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Zoom In">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Zoom Out">
+                    <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Full Screen">
+                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="btn-group" role="group" aria-label="...">
+                  <a class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Pages" href="#">
+                    <span class="glyphicon glyphicon-th" aria-hidden="true"></span> All Pages
+                  </a>
+                  <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" title="All Issues">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> All Issues
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" class="form-control input-sm" aria-label="search" placeholder="Search">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="collapse" data-target="#advancedSearch3" aria-expanded="false" aria-controls="advancedSearch3"><span class="caret"></span></button>
+                    <button type="button" class="btn btn-sm btn-default" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="collapse" id="advancedSearch3">
+                  <br>
+                  <div class="well">
+                    Advanced Search
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- End of Toolbar -->
+      <hr>
+      <div class="row">
+        <div class="col-md-12" id="text1" style="display: none;">
+          <!-- 4 Text Area -->
+          <div id="part4">
+            <div class="row">
+              <div class="col-md-12">
+<pre>
+<embed src="text.txt" style="width: 100%; height: 918px;">
+</pre>
+              </div>
+            </div>
+          </div>
+          <!-- End of Text Area -->
+        </div>
+        <div class="col-md-12" id="image">
+          <!-- 3 Image Area -->
+          <div id="part3">
+            <!-- 3 Image Area panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="part3-design1">
+                <div class="row">
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail active">
+                        <img src="./img/seq-1.jpg">
+                        <div class="caption">
+                          <span>Page 1</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <img src="./img/seq-2.jpg">
+                        <div class="caption">
+                          <span>Page 2</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <img src="./img/seq-3.jpg">
+                        <div class="caption">
+                          <span>Page 3</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <img src="./img/seq-4.jpg">
+                        <div class="caption">
+                          <span>Page 4</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <img src="./img/seq-5.jpg">
+                        <div class="caption">
+                          <span>Page 5</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <div class="caption">
+                          <span>></span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="background-grey outline">
+                      <img src="img/seq-1.jpg" alt="placeholder" class="img-responsive center-block" style="max-height: 1000px;">
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="part3-design2">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="background-grey outline">
+                      <img src="img/seq-1.jpg" alt="placeholder" class="img-responsive center-block" style="max-height: 1000px;">
+                    </div>
+                    <hr>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail active">
+                        <img src="./img/seq-1.jpg">
+                        <div class="caption">
+                          <span>Page 1</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <img src="./img/seq-2.jpg">
+                        <div class="caption">
+                          <span>Page 2</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <img src="./img/seq-3.jpg">
+                        <div class="caption">
+                          <span>Page 3</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <img src="./img/seq-4.jpg">
+                        <div class="caption">
+                          <span>Page 4</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <img src="./img/seq-5.jpg">
+                        <div class="caption">
+                          <span>Page 5</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <a href="#">
+                      <div class="thumbnail">
+                        <div class="caption">
+                          <span>></span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="part3-design3">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="background-grey outline">
+                      <img src="img/seq-1.jpg" alt="placeholder" class="img-responsive center-block" style="max-height: 1000px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="part3-design4">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="background-grey outline">
+                      <img src="img/seq-1.jpg" alt="placeholder" class="img-responsive center-block" style="max-height: 1000px;">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="text-center">
+                      <ul class="pagination">
+                        <li class="disabled">
+                          <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <li class="active"><a href="#">Page 1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                          <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="part3-design5">
+                <div class="row">
+                  <div class="col-md-2" style="max-height: 1000px; overflow: scroll;">
+                    <div class="text-center">
+                      <a href="#">
+                        <div class="thumbnail active">
+                          <img src="./img/seq-1.jpg">
+                          <div class="caption">
+                            <span>Page 1</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="text-center">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <img src="./img/seq-2.jpg">
+                          <div class="caption">
+                            <span>Page 2</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="text-center">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <img src="./img/seq-3.jpg">
+                          <div class="caption">
+                            <span>Page 3</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="text-center">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <img src="./img/seq-4.jpg">
+                          <div class="caption">
+                            <span>Page 4</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="text-center">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <img src="./img/seq-5.jpg">
+                          <div class="caption">
+                            <span>Page 5</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="text-center">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <div class="caption">
+                            <span>></span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-md-10">
+                    <div class="background-grey outline">
+                      <img src="img/seq-1.jpg" alt="placeholder" class="img-responsive center-block" style="max-height: 1000px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="part3-design6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="text-center" style="overflow: auto; overflow-y: scroll; max-width: 100%">
+                      <div style="width: 4828px;">
+                        <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                          <img src="./img/seq-1.jpg">
+                          <div class="caption">
+                            <span>Page 1</span>
+                          </div>
+                        </div>
+                        <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                          <img src="./img/seq-2.jpg">
+                          <div class="caption">
+                            <span>Page 2</span>
+                          </div>
+                        </div>
+                        <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                          <img src="./img/seq-3.jpg">
+                          <div class="caption">
+                            <span>Page 3</span>
+                          </div>
+                        </div>
+                        <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                          <img src="./img/seq-4.jpg">
+                          <div class="caption">
+                            <span>Page 4</span>
+                          </div>
+                        </div>
+                        <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                          <img src="./img/seq-5.jpg">
+                          <div class="caption">
+                            <span>Page 5</span>
+                          </div>
+                        </div>
+                        <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                          <img src="./img/seq-6.jpg">
+                          <div class="caption">
+                            <span>Page 6</span>
+                          </div>
+                        </div>
+                        <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                          <img src="./img/seq-7.jpg">
+                          <div class="caption">
+                            <span>Page 7</span>
+                          </div>
+                        </div>
+                        <div class="thumbnail active" style="width: 600px; height: 810px; display: inline-block; vertical-align: top;">
+                          <img src="./img/seq-8.jpg">
+                          <div class="caption">
+                            <span>Page 8</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="part3-design7">
+                <div class="row">
+                  <div class="col-md-1">
+                    <a class="btn btn-default btn-block disabled" style="height: 640px;" href="#">
+                      <span style="line-height: 640px;">&lt;</span>
+                    </a>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="background-grey outline">
+                      <img src="img/seq-1.jpg" alt="placeholder" class="img-responsive center-block" style="max-height: 1000px;">
+                      <p class="text-center">Page 1</p>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="background-grey outline">
+                      <img src="img/seq-2.jpg" alt="placeholder" class="img-responsive center-block" style="max-height: 1000px;">
+                      <p class="text-center">Page 2</p>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <a class="btn btn-default btn-block" style="height: 640px;" href="#">
+                      <span style="line-height: 640px;">&gt;</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End of Image Area -->
+        </div>
+        <div class="col-md-12" id="text2" style="display: none;">
+          <!-- 4 Text Area -->
+          <div id="part4">
+            <div class="row">
+              <div class="col-md-12">
+<pre>
+<embed src="text.txt" style="width: 100%; height: 918px;">
+</pre>
+              </div>
+            </div>
+          </div>
+          <!-- End of Text Area -->
+        </div>
+      </div>
+      <hr>
+      <!-- Footer -->
+      <footer>
+        <p>
+        copyright link<br>
+        donor list / donation link<br>
+        footer information<br>
+        footer information<br>
+        <br><br><br><br>
+        </p>
+      </footer>
+    </div>
+    <!-- End of Real Content -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="./js/moment.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
+    <script type="text/javascript">
+      $(function () {
+        $('#datetimepicker0').datetimepicker({
+          minDate : '1/1/1858',
+          maxDate : '9/30/1917',
+          viewMode: 'days',
+          format: 'MM/DD/YYYY',
+          allowInputToggle: true
+        });
+        $('#datetimepicker0').data('DateTimePicker').date('7/1/1907');
+      });
+    </script>
+    <script type="text/javascript">
+      function set_active (x, y) {
+        $('.btn-part' + x).removeClass('active');
+        $('#btn-part' + x + '-design' + y).addClass('active');
+      }
+      function set_container_wide (b) {
+        if (b) {
+          $('#container-width').removeClass().addClass('container-fluid');
+        } else {
+          $('#container-width').removeClass().addClass('container');
+        }
+      }
+      function set_text(x) {
+        var t1 = $('#text1');
+        var t2 = $('#text2');
+        var i = $('#image');
+        t1.removeClass().hide();
+        t2.removeClass().hide();
+        i.removeClass().addClass('col-md-12').show();
+        switch(x) {
+          case 1:
+            break;
+          case 2:
+            t1.removeClass().addClass('col-md-4').show();
+            i.removeClass().addClass('col-md-8');
+            break;
+          case 3:
+            t2.removeClass().addClass('col-md-4').show();
+            i.removeClass().addClass('col-md-8');
+            break;
+          case 4:
+            t1.removeClass().addClass('col-md-12').show();
+            i.removeClass().hide();
+            break;
+          case 5:
+            t2.removeClass().addClass('col-md-12').show();
+            break;
+          default:
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>
