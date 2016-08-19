@@ -1,0 +1,52 @@
+{
+  "@context":"http://iiif.io/api/presentation/2/context.json",
+  "@id":"http://iiif-sandbox.lib.umd.edu/manifests/sn83045081/1902-01-15/1",
+  "@type":"sc:AnnotationList",
+
+  "resources": [
+    {
+      "@id" : "http://dev.llgc.org.uk/annotation/1471626334959",
+      "@type" : "oa:Annotation",
+      "dcterms:created" : "2016-08-19T13:05:34",
+      "resources" : [ {
+        "@id" : "_:b1",
+        "@type" : "dctypes:Text",
+        "format" : "text/html",
+        "chars" : ""
+      } ],
+      "on" : {
+        "@id" : "_:b2",
+        "@type" : "oa:SpecificResource",
+        "selector" : {
+          "@id" : "_:b0",
+          "@type" : "oa:FragmentSelector",
+          "value" : "xywh=300,400,50,20"
+        },
+        "full" : "http://iiif-sandbox.lib.umd.edu/manifests/sn83045081/1902-01-15/1"
+      },
+      "motivation" : [ "oa:commenting" ]
+    },
+    {
+      "@id" : "http://dev.llgc.org.uk/annotation/1471626334959",
+      "@type" : "oa:Annotation",
+      "dcterms:created" : "2016-08-19T13:05:34",
+      "resources" : [ {
+        "@id" : "_:b4",
+        "@type" : "dctypes:Text",
+        "format" : "text/html",
+        "chars" : ""
+      } ],
+      "on" : {
+        "@id" : "_:b5",
+        "@type" : "oa:SpecificResource",
+        "selector" : {
+          "@id" : "_:b3",
+          "@type" : "oa:FragmentSelector",
+          "value" : "xywh=300,1300,6800,800"
+        },
+        "full" : "http://iiif-sandbox.lib.umd.edu/manifests/sn83045081/1902-01-15/1"
+      },
+      "motivation" : [ "oa:commenting" ]
+    }
+  ]
+}
